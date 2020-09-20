@@ -1,10 +1,10 @@
 {
   "name": "VC",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node Bot.js"
   },
   "keywords": [],
   "author": "",
@@ -13,5 +13,14 @@
     "discord.js": "^12.3.1",
     "mongoose": "^5.10.5",
     "reaction-role": "^2.1.6"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GratefulDeadpool/vc-announce.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GratefulDeadpool/vc-announce/issues"
+  },
+  "homepage": "https://github.com/GratefulDeadpool/vc-announce#readme",
+  "description": ""
 }
