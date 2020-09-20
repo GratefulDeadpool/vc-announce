@@ -5,8 +5,14 @@ var lastTime = 2.25;
 var coolDown = 0.75;
 var lastCooldown = coolDown;
 var quietHours = false;
-var post = null;
-var roles = [];
+var post = process.env.postChan;
+var roles = [
+  process.env.role1,
+  process.env.role2,
+  process.env.role3,
+  process.env.role4,
+  process.env.role5,
+];
 
 bot.login(process.env.TOKEN);
 
