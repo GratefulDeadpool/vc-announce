@@ -1,5 +1,4 @@
 const Discord = require("discord.js");
-const config = require("./config.json");
 const bot = new Discord.Client();
 
 var lastTime = 2.25;
@@ -9,7 +8,7 @@ var quietHours = false;
 var post = null;
 var roles = [];
 
-bot.login(config.token);
+bot.login(process.env.TOKEN);
 
 bot.on("ready", () => {
   console.log("I am ready!");
