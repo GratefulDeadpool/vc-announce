@@ -55,7 +55,6 @@ bot.on("message", (message) => {
       return message.channel.send(`You didn't provide enough arguments!`);
     } else {
       post = String(args[0]).replace(/\D/g, "");
-      console.log(post);
       return message.channel.send(`Channel set!`);
     }
   }
@@ -64,7 +63,6 @@ bot.on("message", (message) => {
       return message.channel.send(`You didn't provide enough arguments!`);
     } else {
       roles = args;
-      console.log(roles);
       return message.channel.send(`Roles set!`);
     }
   }
