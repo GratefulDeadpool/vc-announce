@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const bot = new Discord.Client();
 
 var lastTime = 2.25;
-var coolDown = 0.75;
+var coolDown = 1.5;
 var lastCooldown = coolDown;
 var quietHours = false;
 var post = process.env.postChan;
@@ -69,6 +69,9 @@ bot.on("message", (message) => {
 });
 
 bot.on("voiceStateUpdate", (oldMember, newMember) => {
+  if (newMember.bot) {
+    return;
+  }
   let newUserChannel = newMember.channel;
   let oldUserChannel = oldMember.channel;
   let time = new Date();
