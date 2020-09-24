@@ -77,6 +77,9 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
   let time = new Date();
   let currTime = time.getHours() + time.getMinutes() / 60.0;
   let roleNotify = roles[0];
+  if (currTime - lastTime < 0) {
+    lastTime = 0;
+  }
   if (
     oldUserChannel === null &&
     newUserChannel !== null &&
