@@ -85,12 +85,13 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
   if (
     oldUserChannel === null &&
     newUserChannel !== null &&
-    newUserChannel !== noPost &&
+    newUserChannel != noPost &&
     newUserChannel.members.size == 1 &&
     currTime - lastTime >= coolDown &&
     post != null &&
     roles != []
   ) {
+    console.log("newUserChannel");
     lastTime = currTime;
     if (currTime < 4.0) {
       roleNotify = roles[5];
