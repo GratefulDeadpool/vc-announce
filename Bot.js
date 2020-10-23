@@ -6,7 +6,7 @@ var coolDown = 1.0;
 var lastCooldown = coolDown;
 var quietHours = false;
 var post = process.env.postChan;
-var noPost = process.env.noPostChan;
+var noPost = [process.env.noPostChan];
 var roles = [
   process.env.role1,
   process.env.role2,
@@ -68,6 +68,14 @@ bot.on("message", (message) => {
       return message.channel.send(`Roles set!`);
     }
   }
+  if (command === "ignore") {
+    if (args.length < 1) {
+      return message.channel.send(`You didn't provide enough arguments!`);
+    } else {
+      noPost = args;
+      return message.channel.send(`Ignores set!`);
+    }
+  }
 });
 
 bot.on("voiceStateUpdate", (oldMember, newMember) => {
@@ -79,6 +87,11 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
   let time = new Date();
   let currTime = time.getHours() + time.getMinutes() / 60.0;
   let roleNotify = roles[0];
+  for (i = 0; i < noPost.length; i++) {
+    if (newUserChannel.id == noPost[i]) {
+      return;
+    }
+  }
   if (currTime - lastTime < 0) {
     lastTime = 0;
   }
@@ -91,7 +104,6 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
     post != null &&
     roles != []
   ) {
-    console.log(newUserChannel);
     lastTime = currTime;
     if (currTime < 4.0) {
       roleNotify = roles[5];
