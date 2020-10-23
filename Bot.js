@@ -87,11 +87,6 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
   let time = new Date();
   let currTime = time.getHours() + time.getMinutes() / 60.0;
   let roleNotify = roles[0];
-  for (i = 0; i < noPost.length; i++) {
-    if (newUserChannel.id == noPost[i]) {
-      return;
-    }
-  }
   if (currTime - lastTime < 0) {
     lastTime = 0;
   }
@@ -103,6 +98,11 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
     post != null &&
     roles != []
   ) {
+    for (i = 0; i < noPost.length; i++) {
+      if (newUserChannel.id == noPost[i]) {
+        return;
+      }
+    }
     lastTime = currTime;
     if (currTime < 4.0) {
       roleNotify = roles[5];
