@@ -1,17 +1,19 @@
 const Discord = require("discord.js");
 const bot = new Discord.Client();
 
-var lastTime = 2.25;
+var lastTime = -1.0;
 var coolDown = 1.0;
 var lastCooldown = coolDown;
 var quietHours = false;
 var post = process.env.postChan;
+var noPost = process.env.noPostChan;
 var roles = [
   process.env.role1,
   process.env.role2,
   process.env.role3,
   process.env.role4,
   process.env.role5,
+  process.env.role6,
 ];
 
 bot.login(process.env.TOKEN);
@@ -59,7 +61,7 @@ bot.on("message", (message) => {
     }
   }
   if (command === "roles") {
-    if (args.length < 5) {
+    if (args.length < 6) {
       return message.channel.send(`You didn't provide enough arguments!`);
     } else {
       roles = args;
@@ -83,13 +85,16 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
   if (
     oldUserChannel === null &&
     newUserChannel !== null &&
+    newUserChannel !== noPost &&
     newUserChannel.members.size == 1 &&
     currTime - lastTime >= coolDown &&
     post != null &&
     roles != []
   ) {
     lastTime = currTime;
-    if (currTime >= 8.0 && currTime < 12.0) {
+    if (currTime < 4.0) {
+      roleNotify = roles[5];
+    } else if (currTime >= 8.0 && currTime < 12.0) {
       roleNotify = roles[0];
     } else if (currTime < 15.0) {
       roleNotify = roles[1];
@@ -100,7 +105,7 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
     } else if (currTime < 24.0) {
       roleNotify = roles[4];
     }
-    if (currTime >= 8.0 && currTime < 24.0) {
+    if (currTime < 4.0 || (currTime >= 8.0 && currTime < 24.0)) {
       bot.channels.cache
         .get(post)
         .send(
