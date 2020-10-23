@@ -98,7 +98,6 @@ bot.on("voiceStateUpdate", (oldMember, newMember) => {
   if (
     oldUserChannel === null &&
     newUserChannel !== null &&
-    newUserChannel.id != noPost &&
     newUserChannel.members.size == 1 &&
     currTime - lastTime >= coolDown &&
     post != null &&
