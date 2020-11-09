@@ -6,7 +6,7 @@ var coolDown = 1.0;
 var lastCooldown = coolDown;
 var quietHours = false;
 var post = process.env.postChan;
-var noPost = [process.env.noPostChan];
+var noPost = [process.env.noPostChan1, process.env.noPostChan2];
 var roles = [
   process.env.role1,
   process.env.role2,
